@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../styles/constants.dart';
-import 'login.dart';
+import 'loginscreen.dart';
 
 class GetStarted extends StatelessWidget {
   late double widthScale, heightScale, width, height;

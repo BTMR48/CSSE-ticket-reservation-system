@@ -43,6 +43,13 @@ dependencies:
   another_flushbar: ^1.12.29
   qr_code_scanner: ^1.0.1
   qr_flutter: ^4.0.0
+  firebase_auth: ^4.1.0
+  firebase_storage: ^11.0.3
+  firebase_core: ^2.1.1
+  cloud_firestore: ^4.0.3
+  path_provider: ^2.0.2
+  fluttertoast: ^8.0.8
+
 
 dev_dependencies:
   flutter_test:

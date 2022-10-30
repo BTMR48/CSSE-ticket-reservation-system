@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "771223592772",
+    "project_id": "csse-cd66f",
+    "storage_bucket": "csse-cd66f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771223592772:android:46ccffde3dc4987eb20111",
+        "android_client_info": {
+          "package_name": "com.example.ticketingsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771223592772-1cqr6d7qr4pod01kg3a061so6n4lfcbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3xqB9o8cm0SZkM8fP2wUeErvU_DHiiYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771223592772-1cqr6d7qr4pod01kg3a061so6n4lfcbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
