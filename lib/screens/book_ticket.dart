@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../styles/constants.dart';
-import 'home.dart';
+import 'homescreen.dart';
 
 class BookTicket extends StatefulWidget {
   const BookTicket({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class _BookTicketState extends State<BookTicket> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Icon(
@@ -64,7 +64,7 @@ class _BookTicketState extends State<BookTicket> {
         form.save();
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       } else {
         Flushbar(

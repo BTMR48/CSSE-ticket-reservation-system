@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../reuseable/text_field.dart';
 import '../styles/constants.dart';
-import 'home.dart';
+import 'homescreen.dart';
 
 class Recharge extends StatefulWidget {
   const Recharge({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _RechargeState extends State<Recharge> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Icon(
@@ -61,7 +61,7 @@ class _RechargeState extends State<Recharge> {
   Widget rechargeDetails() {
     // final details = Provider.of<UserProvider>(context,listen:false);
 
-    var doRecharge = () {
+    doRecharge() {
       print(" on do Recharge...");
       print(amount);
 
@@ -72,7 +72,7 @@ class _RechargeState extends State<Recharge> {
         amount;
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       } else {
         Flushbar(
@@ -81,7 +81,7 @@ class _RechargeState extends State<Recharge> {
           duration: Duration(seconds: 10),
         ).show(context);
       }
-    };
+    }
 
     return SingleChildScrollView(
       child: Column(

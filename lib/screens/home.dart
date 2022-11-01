@@ -60,7 +60,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getPastJourney();
     // final details = <UserProvider>(context, listen: false);
@@ -83,14 +82,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: kWhite,
-        iconTheme: IconThemeData(color: kDarkBlue),
+        iconTheme: IconThemeData(color: Colors.green),
         //leading:  Icon(Icons.menu,color: kDarkBlue,),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: widthScale * 10),
-            child: Icon(
+            child: const Icon(
               Icons.notifications_none,
-              color: kDarkBlue,
+              color: Colors.green,
             ),
           ),
         ],
@@ -102,8 +101,8 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: kDarkBlue,
+              decoration: const BoxDecoration(
+                color: Colors.green,
               ),
               child: Text.rich(
                 TextSpan(

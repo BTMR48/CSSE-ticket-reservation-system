@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../model/journey.dart';
 import '../styles/constants.dart';
-import 'home.dart';
+import 'homescreen.dart';
 
 class MyBooking extends StatefulWidget {
   const MyBooking({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class MyBooking extends StatefulWidget {
 class _MyBookingState extends State<MyBooking> {
   late double widthScale, heightScale, width;
   List<Journey> journey = [];
-  late bool isLoading = false;
+  bool isLoading = false;
 
   //fetch Details from the API CAll
   String url =
@@ -72,7 +72,7 @@ class _MyBookingState extends State<MyBooking> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Icon(
@@ -187,16 +187,7 @@ class _MyBookingState extends State<MyBooking> {
                                     ),
                                   ),
                                   Text(
-                                    journey[index]
-                                            .startTime!
-                                            .toString()
-                                            .substring(11, 16) +
-                                        ' - ' +
-                                        journey[index]
-                                            .endTime
-                                            .toString()
-                                            .substring(11, 16) +
-                                        ' Am',
+                                    '${journey[index].startTime!.toString().substring(11, 16)} - ${journey[index].endTime.toString().substring(11, 16)} Am',
                                     style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
                                         fontSize: 14,

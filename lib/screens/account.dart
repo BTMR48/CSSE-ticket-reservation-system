@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ticketingsystem/screens/homescreen.dart';
 import 'package:ticketingsystem/screens/recharge.dart';
 
 import '../reuseable/container_card.dart';
 import '../styles/constants.dart';
-import 'home.dart';
 import 'my_booking.dart';
 
 class UserAccount extends StatefulWidget {
@@ -33,7 +33,7 @@ class _UserAccountState extends State<UserAccount> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Icon(
@@ -154,7 +154,7 @@ class _UserAccountState extends State<UserAccount> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Padding(

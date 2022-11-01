@@ -8,7 +8,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../model/journey.dart';
 import '../styles/constants.dart';
-import 'home.dart';
+import 'homescreen.dart';
 
 class GenerateQr extends StatefulWidget {
   const GenerateQr({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class _GenerateQrState extends State<GenerateQr> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Icon(
