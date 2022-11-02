@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:ticketingsystem/screens/homescreen.dart';
 import 'package:ticketingsystem/screens/recharge.dart';
 
+import '../model/user_model.dart';
 import '../reuseable/container_card.dart';
 import '../styles/constants.dart';
 import 'login.dart';
@@ -19,6 +22,22 @@ class UserAccount extends StatefulWidget {
 
 class _UserAccountState extends State<UserAccount> {
   late double widthScale, heightScale;
+  // for fetch data 14 th line and 15 th line very important
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.formMap(value.data());
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +93,7 @@ class _UserAccountState extends State<UserAccount> {
           ),
         ),
         Text(
-          '#',
+          "${loggedInUser.uid}",
           style: GoogleFonts.roboto(
             textStyle: TextStyle(
               fontSize: 20,
@@ -84,30 +103,20 @@ class _UserAccountState extends State<UserAccount> {
           ),
         ),
         Text(
-          '#',
+          "${loggedInUser.email}",
           style: GoogleFonts.roboto(
             textStyle: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
               color: kWhite,
             ),
           ),
         ),
         Text(
-          '#',
+          "${loggedInUser.firstName}${loggedInUser.secondName}",
           style: GoogleFonts.roboto(
             textStyle: TextStyle(
               fontSize: 15,
-              fontWeight: FontWeight.w400,
-              color: kWhite,
-            ),
-          ),
-        ),
-        Text(
-          '#',
-          style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-              fontSize: 12,
               fontWeight: FontWeight.w400,
               color: kWhite,
             ),

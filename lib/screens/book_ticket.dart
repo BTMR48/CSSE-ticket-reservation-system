@@ -1,8 +1,12 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../model/amount_model.dart';
+import '../model/user_model.dart';
 import '../styles/constants.dart';
 import 'homescreen.dart';
 
@@ -17,6 +21,11 @@ class _BookTicketState extends State<BookTicket> {
   late double widthScale, heightScale;
   final formKey = GlobalKey<FormState>();
   late String from, to, date, time;
+  TextEditingController sampledata1 = new TextEditingController();
+  TextEditingController sampledata2 = new TextEditingController();
+  TextEditingController sampledata3 = new TextEditingController();
+  TextEditingController sampledata4 = new TextEditingController();
+  TextEditingController sampledata5 = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +116,7 @@ class _BookTicketState extends State<BookTicket> {
           ),
         ),
         Text(
-          'LKR 1500.00',
+          "${oneAmount?.amount}",
           style: GoogleFonts.roboto(
             fontSize: 25,
             fontWeight: FontWeight.w600,
@@ -137,6 +146,7 @@ class _BookTicketState extends State<BookTicket> {
                   child: Padding(
                     padding: EdgeInsets.only(left: widthScale * 10),
                     child: TextFormField(
+                      controller: sampledata1,
                       autofocus: false,
                       validator: (value) =>
                           value!.isEmpty ? "Please Enter start Location" : null,
@@ -175,6 +185,7 @@ class _BookTicketState extends State<BookTicket> {
                   child: Padding(
                     padding: EdgeInsets.only(left: widthScale * 10),
                     child: TextFormField(
+                      controller: sampledata2,
                       autofocus: false,
                       validator: (value) =>
                           value!.isEmpty ? "Please Enter End Location" : null,
@@ -213,6 +224,7 @@ class _BookTicketState extends State<BookTicket> {
                   child: Padding(
                     padding: EdgeInsets.only(left: widthScale * 10),
                     child: TextFormField(
+                      controller: sampledata3,
                       autofocus: false,
                       validator: (value) =>
                           value!.isEmpty ? "Please Enter Date" : null,
@@ -251,6 +263,7 @@ class _BookTicketState extends State<BookTicket> {
                   child: Padding(
                     padding: EdgeInsets.only(left: widthScale * 10),
                     child: TextFormField(
+                      controller: sampledata4,
                       autofocus: false,
                       validator: (value) =>
                           value!.isEmpty ? "Please Enter Time" : null,
@@ -271,37 +284,43 @@ class _BookTicketState extends State<BookTicket> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        Padding(
-          padding:
-              EdgeInsets.only(left: widthScale * 100, top: heightScale * 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                'Total Amount',
-                style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: kOrange,
+              Padding(
+                padding: EdgeInsets.only(
+                  left: widthScale * 20,
+                  right: widthScale * 20,
+                  bottom: heightScale * 8,
                 ),
-              ),
-              Text(
-                'Ticket ID : 225402',
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: kGrey,
-                ),
-              ),
-              Text(
-                'LKR 300.00',
-                style: GoogleFonts.roboto(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w800,
-                  color: kOrange,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      width: 1,
+                      color: kDarkBlue.withOpacity(0.4),
+                    ),
+                    color: kWhite,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: widthScale * 10),
+                    child: TextFormField(
+                      controller: sampledata5,
+                      autofocus: false,
+                      validator: (value) =>
+                          value!.isEmpty ? "Please Enter Amount" : null,
+                      onSaved: (value) => time = value!,
+                      style: TextStyle(color: kDarkBlue),
+                      decoration: InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        hintText: 'Amount',
+                        hintStyle: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                            color: kDarkBlue.withOpacity(0.4),
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -312,7 +331,7 @@ class _BookTicketState extends State<BookTicket> {
             top: heightScale * 20,
           ),
           child: ElevatedButton(
-            onPressed: doRecharge,
+            onPressed: displayMessage,
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -334,5 +353,71 @@ class _BookTicketState extends State<BookTicket> {
         ),
       ],
     );
+  }
+
+  String? userId;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+  Amounts? oneAmount;
+  bool loading = false;
+  @override
+  initState() {
+    super.initState();
+    loading = true;
+    getAmount();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.formMap(value.data());
+      setState(() {});
+    });
+  }
+
+  Future<void> getAmount() async {
+    final id = user!.uid;
+
+    final reference = FirebaseFirestore.instance.doc('recharge/$id');
+    final snapshot = reference.get();
+
+    final result = await snapshot.then(
+        (snap) => snap.data() == null ? null : Amounts.fromJson(snap.data()!));
+    print('result is ====> $result');
+    setState(() {
+      oneAmount = result;
+      loading = false;
+    });
+  }
+
+  void displayMessage() {
+    int amount = (int.tryParse(oneAmount!.amount) ?? 0) -
+        (int.tryParse(sampledata5.text) ?? 0);
+    if (amount >= 0) {
+      FirebaseFirestore.instance
+          .collection("booking")
+          .doc("${loggedInUser.uid}")
+          .set({
+        "From": sampledata1.text,
+        "To": sampledata2.text,
+        "Date": sampledata3.text,
+        "Time": sampledata4.text,
+        "Amount": sampledata5.text,
+      });
+      FirebaseFirestore.instance
+          .collection("recharge")
+          .doc("${loggedInUser.uid}")
+          .set({
+        "amount": amount.toString(),
+      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Insufficient balance"),
+      ));
+    }
   }
 }

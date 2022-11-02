@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ticketingsystem/screens/homescreen.dart';
+import 'package:ticketingsystem/screens/login.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: const Scaffold(
         body: SafeArea(
-          child: HomeScreen(),
+          child: LoginScreen(),
         ),
       ),
       // routes: {
