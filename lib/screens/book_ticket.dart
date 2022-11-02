@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../styles/constants.dart';
 import 'homescreen.dart';
@@ -23,10 +24,10 @@ class _BookTicketState extends State<BookTicket> {
     heightScale = MediaQuery.of(context).size.height / 448;
 
     return Scaffold(
-      backgroundColor: kDarkBlue,
+      backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kDarkBlue,
+        backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {

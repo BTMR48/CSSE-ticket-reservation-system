@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:ticketingsystem/screens/homescreen.dart';
 import 'package:ticketingsystem/screens/recharge.dart';
 
 import '../reuseable/container_card.dart';
 import '../styles/constants.dart';
+import 'login.dart';
 import 'my_booking.dart';
 
 class UserAccount extends StatefulWidget {
@@ -24,10 +26,10 @@ class _UserAccountState extends State<UserAccount> {
     heightScale = MediaQuery.of(context).size.height / 448;
 
     return Scaffold(
-      backgroundColor: kDarkBlue,
+      backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kDarkBlue,
+        backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
@@ -171,7 +173,10 @@ class _UserAccountState extends State<UserAccount> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushReplacementNamed(context, '/login');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
           },
           child: Padding(
             padding: EdgeInsets.only(

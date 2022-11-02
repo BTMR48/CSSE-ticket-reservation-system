@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: EdgeInsets.only(right: widthScale * 10),
             child: const Icon(
-              Icons.notifications_none,
+              Icons.person,
               color: Colors.green,
             ),
           ),
@@ -412,6 +412,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              alignment: Alignment.bottomRight,
+              child: Image.asset(
+                'assets/images/bus.png',
+                width: widthScale * 80,
+                height: heightScale * 50,
               ),
             ),
           ],

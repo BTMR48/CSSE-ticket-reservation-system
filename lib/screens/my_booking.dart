@@ -125,7 +125,7 @@ class _MyBookingState extends State<MyBooking> {
           ),
           Expanded(
             child: ListView.separated(
-              itemCount: null == journey ? 0 : journey.length - 3,
+              itemCount: null == journey ? 0 : journey.length,
               itemBuilder: (BuildContext context, int index) {
                 return isLoading
                     ? loading

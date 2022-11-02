@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../reuseable/text_field.dart';
 import '../styles/constants.dart';
@@ -26,10 +27,10 @@ class _RechargeState extends State<Recharge> {
     width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: kDarkBlue,
+      backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kDarkBlue,
+        backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           onTap: () {
