@@ -249,7 +249,7 @@ class _RechargeState extends State<Recharge> {
   Future<void> getAmount() async {
     final id = user!.uid;
 
-    final reference = FirebaseFirestore.instance.doc('recharge/$id');
+    final reference = FirebaseFirestore.instance.doc('users/$id/recharge/$id');
     final snapshot = reference.get();
 
     final result = await snapshot.then(
@@ -268,6 +268,8 @@ class _RechargeState extends State<Recharge> {
           (int.tryParse(amountController.text) ?? 0);
 
       FirebaseFirestore.instance
+          .collection("users")
+          .doc("${loggedInUser.uid}")
           .collection("recharge")
           .doc("${loggedInUser.uid}")
           .set({
