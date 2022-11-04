@@ -395,8 +395,10 @@ class _BookTicketState extends State<BookTicket> {
         (int.tryParse(sampledata5.text) ?? 0);
     if (amount >= 0) {
       FirebaseFirestore.instance
-          .collection("booking")
+          .collection("users")
           .doc("${loggedInUser.uid}")
+          .collection("booking")
+          .doc()
           .set({
         "From": sampledata1.text,
         "To": sampledata2.text,

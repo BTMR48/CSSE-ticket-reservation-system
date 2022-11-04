@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../model/bookingModel.dart';
+import '../model/user_model.dart';
 
 class MyBooking extends StatefulWidget {
   const MyBooking({Key? key}) : super(key: key);
@@ -12,8 +14,32 @@ class MyBooking extends StatefulWidget {
 }
 
 class _MyBookingState extends State<MyBooking> {
+  String? userId;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  bool loading = false;
+  @override
+  initState() {
+    super.initState();
+    loading = true;
+
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.formMap(value.data());
+      setState(() {});
+    });
+  }
+
   Future<List<Bookings>> fetchRecords() async {
-    var records = await FirebaseFirestore.instance.collection('booking').get();
+    var records = await FirebaseFirestore.instance
+        .collection('users')
+        .doc("${loggedInUser.uid}")
+        .collection("booking")
+        .get();
     return mapRecords(records);
   }
 
@@ -64,10 +90,31 @@ class _MyBookingState extends State<MyBooking> {
                                     height: 100,
                                     child: Column(
                                       children: <Widget>[
+                                        // Row(
+                                        //   children: <Widget>[
+                                        //     Padding(
+                                        //       padding:
+                                        //           const EdgeInsets.all(8.0),
+                                        //       child: Text(data[index].From,
+                                        //           style: TextStyle(
+                                        //             color: Colors.blue,
+                                        //             fontWeight: FontWeight.w900,
+                                        //           )),
+                                        //     ),
+                                        //     Text(data[index].To),
+                                        //     Text(data[index].Date +
+                                        //         ' ' +
+                                        //         data[index].Time),
+                                        //     Text(data[index].Amount),
+                                        //   ],
+                                        // ),
                                         ListTile(
-                                          leading: Text(data[index].From),
+                                          leading: Text(
+                                              'From : ' + data[index].From),
                                           title: Text(data[index].To),
-                                          subtitle: Text(data[index].Date),
+                                          subtitle: Text(data[index].Date +
+                                              ' ' +
+                                              data[index].Time),
                                           trailing: Text(data[index].Amount),
                                         )
                                       ],
