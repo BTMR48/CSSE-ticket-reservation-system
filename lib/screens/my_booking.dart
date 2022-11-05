@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:ticketingsystem/styles/constants.dart';
+
 import '../model/bookingModel.dart';
 import '../model/user_model.dart';
 
@@ -67,12 +68,31 @@ class _MyBookingState extends State<MyBooking> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: HexColor('#00FFFF').withOpacity(0.4),
+      backgroundColor: HexColor('#37c232').withOpacity(0.4),
       body: Column(
         children: [
           Padding(
+            padding: EdgeInsets.only(top: height * 0.0285),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ListTile(
+                    leading: GestureDetector(
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_sharp,
+                        color: Colors.black,
+                        size: 24.0,
+                      ),
+                      onTap: () => Navigator.pop(context),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding:
-                EdgeInsets.only(top: height * 0.10, bottom: height * 0.025),
+                EdgeInsets.only(top: height * 0.010, bottom: height * 0.025),
             child: Text(
               'My Bookings',
               style: GoogleFonts.dmSans(
@@ -86,10 +106,78 @@ class _MyBookingState extends State<MyBooking> {
             child: Column(
               //chip words
               children: <Widget>[
-                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 100,
+                      child: Card(
+                        color: Colors.red,
+                        child: Center(
+                          child: Text(
+                            "From",
+                            style: GoogleFonts.dmSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: HexColor('#abf7b1').withOpacity(0.4),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.red,
+                      child: SizedBox(
+                        width: 100,
+                        child: Center(
+                          child: Text(
+                            "To",
+                            style: GoogleFonts.dmSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: HexColor('#abf7b1').withOpacity(0.4),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.red,
+                      child: SizedBox(
+                        width: 100,
+                        child: Center(
+                          child: Text(
+                            "Date /Time",
+                            style: GoogleFonts.dmSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: HexColor('#abf7b1').withOpacity(0.4),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.red,
+                      child: SizedBox(
+                        width: 50,
+                        child: Center(
+                          child: Text(
+                            " RS.",
+                            style: GoogleFonts.dmSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: HexColor('#abf7b1').withOpacity(0.4),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
                     width: width,
-                    height: height * 0.70,
+                    height: height * 0.75,
                     child: FutureBuilder<List<Bookings>>(
                         future: fetchRecords(),
                         builder: (context, snapshot) {
@@ -101,30 +189,37 @@ class _MyBookingState extends State<MyBooking> {
                             return ListView.builder(
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {
-                                  return (SizedBox(
-                                    height: 50,
-                                    child: Column(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(7.0),
-                                                child: Text(
-                                                  data[index].From,
-                                                  style: GoogleFonts.dmSans(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14,
-                                                    color: HexColor('#abf7b1')
-                                                        .withOpacity(0.4),
+                                  return (Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 0),
+                                        child: SizedBox(
+                                          height: 100,
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            color: Colors.blueAccent,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: <Widget>[
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    data[index].From,
+                                                    style: GoogleFonts.dmSans(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 14,
+                                                      color: HexColor('#abf7b1')
+                                                          .withOpacity(0.4),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(7.0),
+                                                SizedBox(
+                                                  width: 100,
                                                   child: Text(
                                                     data[index].To,
                                                     style: GoogleFonts.dmSans(
@@ -134,46 +229,47 @@ class _MyBookingState extends State<MyBooking> {
                                                       color: HexColor('#abf7b1')
                                                           .withOpacity(0.4),
                                                     ),
-                                                  )),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(7.0),
-                                                child: Text(
-                                                  data[index].Date +
-                                                      ' ' +
-                                                      data[index].Time,
-                                                  style: GoogleFonts.dmSans(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14,
-                                                    color: HexColor('#abf7b1')
-                                                        .withOpacity(0.4),
                                                   ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(7.0),
-                                                child: Text(
-                                                  data[index].Amount,
-                                                  style: GoogleFonts.dmSans(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14,
-                                                    color: HexColor('#abf7b1')
-                                                        .withOpacity(0.4),
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    data[index].Date +
+                                                        ' ' +
+                                                        data[index].Time,
+                                                    style: GoogleFonts.dmSans(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 14,
+                                                      color: HexColor('#abf7b1')
+                                                          .withOpacity(0.4),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(
+                                                  width: 50,
+                                                  child: Text(
+                                                    data[index].Amount,
+                                                    style: GoogleFonts.dmSans(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 14,
+                                                      color: HexColor('#abf7b1')
+                                                          .withOpacity(0.4),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        // ListTile(
-                                        //   leading: Text(data[index].From,style: TextStyle(color: Colors.white)),
-                                        //   title: Text(data[index].To),
-                                        //   trailing: Text(data[index].Amount),
-                                        // )
-                                       
-                                      ],
-                                    ),
+                                      ),
+                                      // ListTile(
+                                      //   leading: Text(data[index].From,style: TextStyle(color: Colors.white)),
+                                      //   title: Text(data[index].To),
+                                      //   trailing: Text(data[index].Amount),
+                                      // )
+                                    ],
                                   ));
                                 });
                           }
