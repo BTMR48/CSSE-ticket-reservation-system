@@ -19,10 +19,14 @@ class Recharge extends StatefulWidget {
 
 class _RechargeState extends State<Recharge> {
   late double widthScale, heightScale, width;
-
   late int amount;
   final formKey = GlobalKey<FormState>();
   TextEditingController amountController = new TextEditingController();
+  TextEditingController cardTypeController = new TextEditingController();
+  TextEditingController cardNumberController = new TextEditingController();
+  TextEditingController cvcController = new TextEditingController();
+  TextEditingController holdernameController = new TextEditingController();
+  TextEditingController exdateController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -113,9 +117,48 @@ class _RechargeState extends State<Recharge> {
             key: formKey,
             child: Column(
               children: [
-                TextFieldRounded(
-                  color: kWhite,
-                  placeHolder: 'Card type',
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: widthScale * 20,
+                    right: widthScale * 20,
+                    bottom: heightScale * 8,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 1,
+                        color: kDarkBlue.withOpacity(0.4),
+                      ),
+                      color: kWhite,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: widthScale * 10),
+                      child: TextFormField(
+                        controller: cardTypeController,
+                        autofocus: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter card type';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => amount = value! as int,
+                        style: TextStyle(color: kDarkBlue),
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: 'Card type',
+                          hintStyle: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                              color: kDarkBlue.withOpacity(0.4),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -137,8 +180,12 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: amountController,
                         autofocus: true,
-                        validator: (value) =>
-                            value!.isEmpty ? "Please Enter Amount" : null,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter amount';
+                          }
+                          return null;
+                        },
                         onSaved: (value) => amount = value! as int,
                         style: TextStyle(color: kDarkBlue),
                         decoration: InputDecoration(
@@ -156,21 +203,177 @@ class _RechargeState extends State<Recharge> {
                     ),
                   ),
                 ),
-                TextFieldRounded(
-                  color: kWhite,
-                  placeHolder: 'Card Number',
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: widthScale * 20,
+                    right: widthScale * 20,
+                    bottom: heightScale * 8,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 1,
+                        color: kDarkBlue.withOpacity(0.4),
+                      ),
+                      color: kWhite,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: widthScale * 10),
+                      child: TextFormField(
+                        controller: cardNumberController,
+                        autofocus: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter card number';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => amount = value! as int,
+                        style: TextStyle(color: kDarkBlue),
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: 'Card number',
+                          hintStyle: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                              color: kDarkBlue.withOpacity(0.4),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                TextFieldRounded(
-                  color: kWhite,
-                  placeHolder: 'CVC',
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: widthScale * 20,
+                    right: widthScale * 20,
+                    bottom: heightScale * 8,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 1,
+                        color: kDarkBlue.withOpacity(0.4),
+                      ),
+                      color: kWhite,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: widthScale * 10),
+                      child: TextFormField(
+                        controller: cvcController,
+                        autofocus: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter cvc';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => amount = value! as int,
+                        style: TextStyle(color: kDarkBlue),
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: 'CVC',
+                          hintStyle: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                              color: kDarkBlue.withOpacity(0.4),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                TextFieldRounded(
-                  color: kWhite,
-                  placeHolder: 'Card Holder Name',
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: widthScale * 20,
+                    right: widthScale * 20,
+                    bottom: heightScale * 8,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 1,
+                        color: kDarkBlue.withOpacity(0.4),
+                      ),
+                      color: kWhite,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: widthScale * 10),
+                      child: TextFormField(
+                        controller: holdernameController,
+                        autofocus: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter card holder name';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => amount = value! as int,
+                        style: TextStyle(color: kDarkBlue),
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: 'Card holder name',
+                          hintStyle: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                              color: kDarkBlue.withOpacity(0.4),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                TextFieldRounded(
-                  color: kWhite,
-                  placeHolder: 'Expiry date',
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: widthScale * 20,
+                    right: widthScale * 20,
+                    bottom: heightScale * 8,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        width: 1,
+                        color: kDarkBlue.withOpacity(0.4),
+                      ),
+                      color: kWhite,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: widthScale * 10),
+                      child: TextFormField(
+                        controller: exdateController,
+                        autofocus: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter expiry date';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => amount = value! as int,
+                        style: TextStyle(color: kDarkBlue),
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          hintText: 'Expiry date',
+                          hintStyle: GoogleFonts.roboto(
+                            textStyle: TextStyle(
+                              color: kDarkBlue.withOpacity(0.4),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -180,7 +383,16 @@ class _RechargeState extends State<Recharge> {
               top: heightScale * 15,
             ),
             child: ElevatedButton(
-              onPressed: displayMessage,
+              onPressed: () {
+                // Validate returns true if the form is valid, or false otherwise.
+                if (formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('successfully recharged')),
+                  );
+                  displayMessage();
+                }
+
+              },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -294,4 +506,5 @@ class _RechargeState extends State<Recharge> {
       );
     }
   }
+
 }

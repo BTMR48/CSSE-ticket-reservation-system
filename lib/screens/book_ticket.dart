@@ -148,8 +148,12 @@ class _BookTicketState extends State<BookTicket> {
                     child: TextFormField(
                       controller: sampledata1,
                       autofocus: false,
-                      validator: (value) =>
-                          value!.isEmpty ? "Please Enter start Location" : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter start location';
+                        }
+                        return null;
+                      },
                       onSaved: (value) => from = value!,
                       style: TextStyle(color: kDarkBlue),
                       decoration: InputDecoration(
@@ -187,8 +191,12 @@ class _BookTicketState extends State<BookTicket> {
                     child: TextFormField(
                       controller: sampledata2,
                       autofocus: false,
-                      validator: (value) =>
-                          value!.isEmpty ? "Please Enter End Location" : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter end location';
+                        }
+                        return null;
+                      },
                       onSaved: (value) => to = value!,
                       style: TextStyle(color: kDarkBlue),
                       decoration: InputDecoration(
@@ -226,8 +234,12 @@ class _BookTicketState extends State<BookTicket> {
                     child: TextFormField(
                       controller: sampledata3,
                       autofocus: false,
-                      validator: (value) =>
-                          value!.isEmpty ? "Please Enter Date" : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter date';
+                        }
+                        return null;
+                      },
                       onSaved: (value) => date = value!,
                       style: TextStyle(color: kDarkBlue),
                       decoration: InputDecoration(
@@ -265,8 +277,12 @@ class _BookTicketState extends State<BookTicket> {
                     child: TextFormField(
                       controller: sampledata4,
                       autofocus: false,
-                      validator: (value) =>
-                          value!.isEmpty ? "Please Enter Time" : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter time';
+                        }
+                        return null;
+                      },
                       onSaved: (value) => time = value!,
                       style: TextStyle(color: kDarkBlue),
                       decoration: InputDecoration(
@@ -304,8 +320,12 @@ class _BookTicketState extends State<BookTicket> {
                     child: TextFormField(
                       controller: sampledata5,
                       autofocus: false,
-                      validator: (value) =>
-                          value!.isEmpty ? "Please Enter Amount" : null,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter amount';
+                        }
+                        return null;
+                      },
                       onSaved: (value) => time = value!,
                       style: TextStyle(color: kDarkBlue),
                       decoration: InputDecoration(
@@ -331,7 +351,16 @@ class _BookTicketState extends State<BookTicket> {
             top: heightScale * 20,
           ),
           child: ElevatedButton(
-            onPressed: displayMessage,
+                 onPressed: () {
+                // Validate returns true if the form is valid, or false otherwise.
+                if (formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('successfully booked')),
+                  );
+                  displayMessage();
+                }
+
+              },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -341,7 +370,7 @@ class _BookTicketState extends State<BookTicket> {
               backgroundColor: MaterialStateProperty.all<Color>(kOrange),
             ),
             child: Text(
-              'Pay Amount',
+              'Book',
               style: GoogleFonts.poppins(
                 textStyle: const TextStyle(
                   fontSize: 15,
