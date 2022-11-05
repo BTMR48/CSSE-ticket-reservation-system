@@ -68,7 +68,7 @@ class _MyBookingState extends State<MyBooking> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: HexColor('#37c232').withOpacity(0.4),
+      backgroundColor: HexColor('#1C413B').withOpacity(0.8),
       body: Column(
         children: [
           Padding(
@@ -80,7 +80,7 @@ class _MyBookingState extends State<MyBooking> {
                     leading: GestureDetector(
                       child: const Icon(
                         Icons.arrow_back_ios_new_sharp,
-                        color: Colors.black,
+                        color: Colors.white,
                         size: 24.0,
                       ),
                       onTap: () => Navigator.pop(context),
@@ -112,7 +112,7 @@ class _MyBookingState extends State<MyBooking> {
                     SizedBox(
                       width: 100,
                       child: Card(
-                        color: Colors.red,
+                        color: HexColor('#1C413B').withOpacity(0.4),
                         child: Center(
                           child: Text(
                             "From",
@@ -126,7 +126,7 @@ class _MyBookingState extends State<MyBooking> {
                       ),
                     ),
                     Card(
-                      color: Colors.red,
+                      color: HexColor('#1C413B').withOpacity(0.4),
                       child: SizedBox(
                         width: 100,
                         child: Center(
@@ -142,7 +142,7 @@ class _MyBookingState extends State<MyBooking> {
                       ),
                     ),
                     Card(
-                      color: Colors.red,
+                      color: HexColor('#1C413B').withOpacity(0.4),
                       child: SizedBox(
                         width: 100,
                         child: Center(
@@ -158,7 +158,7 @@ class _MyBookingState extends State<MyBooking> {
                       ),
                     ),
                     Card(
-                      color: Colors.red,
+                      color: HexColor('#1C413B').withOpacity(0.4),
                       child: SizedBox(
                         width: 50,
                         child: Center(
@@ -200,7 +200,7 @@ class _MyBookingState extends State<MyBooking> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
-                                            color: Colors.blueAccent,
+                                            color: HexColor('#618270').withOpacity(0.4),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
