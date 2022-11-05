@@ -21,6 +21,7 @@ class _BookTicketState extends State<BookTicket> {
   late double widthScale, heightScale;
   final formKey = GlobalKey<FormState>();
   late String from, to, date, time;
+  // get text field
   TextEditingController sampledata1 = new TextEditingController();
   TextEditingController sampledata2 = new TextEditingController();
   TextEditingController sampledata3 = new TextEditingController();
@@ -351,16 +352,12 @@ class _BookTicketState extends State<BookTicket> {
             top: heightScale * 20,
           ),
           child: ElevatedButton(
-                 onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('successfully booked')),
-                  );
-                  displayMessage();
-                }
-
-              },
+            onPressed: () {
+              // Validate returns true if the form is valid, or false otherwise.
+              if (formKey.currentState!.validate()) {
+                displayMessage();
+              }
+            },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -443,6 +440,9 @@ class _BookTicketState extends State<BookTicket> {
           .set({
         "amount": amount.toString(),
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('successfully booked')),
+      );
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const HomeScreen()),

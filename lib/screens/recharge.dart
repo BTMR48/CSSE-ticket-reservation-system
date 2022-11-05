@@ -6,7 +6,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:ticketingsystem/model/amount_model.dart';
 
 import '../model/user_model.dart';
-import '../reuseable/text_field.dart';
 import '../styles/constants.dart';
 import 'homescreen.dart';
 
@@ -391,7 +390,6 @@ class _RechargeState extends State<Recharge> {
                   );
                   displayMessage();
                 }
-
               },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -440,9 +438,6 @@ class _RechargeState extends State<Recharge> {
   String? userId;
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-  Amounts? oneAmount;
-  bool loading = false;
-
   @override
   initState() {
     super.initState();
@@ -457,6 +452,9 @@ class _RechargeState extends State<Recharge> {
       setState(() {});
     });
   }
+
+  Amounts? oneAmount;
+  bool loading = false;
 
   Future<void> getAmount() async {
     final id = user!.uid;
@@ -506,5 +504,4 @@ class _RechargeState extends State<Recharge> {
       );
     }
   }
-
 }
