@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:ticketingsystem/screens/homescreen.dart';
 import 'package:ticketingsystem/screens/recharge.dart';
-
 import '../model/user_model.dart';
 import '../reuseable/container_card.dart';
 import '../styles/constants.dart';

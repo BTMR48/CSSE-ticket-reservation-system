@@ -16,7 +16,7 @@ class Recharge extends StatefulWidget {
   @override
   _RechargeState createState() => _RechargeState();
 }
-
+//This page is used to recharge the account by the user.
 class _RechargeState extends State<Recharge> {
   late double widthScale, heightScale, width;
   late int amount;
@@ -68,8 +68,6 @@ class _RechargeState extends State<Recharge> {
   }
 
   Widget rechargeDetails() {
-    // final details = Provider.of<UserProvider>(context,listen:false);
-
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -137,6 +135,7 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: cardTypeController,
                         autofocus: true,
+                        //validation for the card type.Card type can not be null
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter card type';
@@ -180,6 +179,7 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: amountController,
                         autofocus: true,
+                        //validation for the amount.Amount can not be null
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter amount';
@@ -223,6 +223,7 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: cardNumberController,
                         autofocus: true,
+                        //validation for the card number.Card number can not be null
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter card number';
@@ -266,6 +267,7 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: cvcController,
                         autofocus: true,
+                        //validation for the cvc.CVC can not be null
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter cvc';
@@ -309,6 +311,7 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: holdernameController,
                         autofocus: true,
+                        //validation for the card holder name.Card holder name can not be null
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter card holder name';
@@ -352,6 +355,7 @@ class _RechargeState extends State<Recharge> {
                       child: TextFormField(
                         controller: exdateController,
                         autofocus: true,
+                        //validation for the Expiry date.Expiry date can not be null
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter expiry date';
@@ -412,26 +416,6 @@ class _RechargeState extends State<Recharge> {
               ),
             ),
           ),
-          // Text(
-          //   "${loggedInUser.uid}",
-          //   style: GoogleFonts.roboto(
-          //     textStyle: TextStyle(
-          //       fontSize: 20,
-          //       fontWeight: FontWeight.bold,
-          //       color: kWhite,
-          //     ),
-          //   ),
-          // ),
-          // Text(
-          //   "${oneAmount?.amount}",
-          //   style: GoogleFonts.roboto(
-          //     textStyle: TextStyle(
-          //       fontSize: 20,
-          //       fontWeight: FontWeight.bold,
-          //       color: kWhite,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -458,6 +442,7 @@ class _RechargeState extends State<Recharge> {
     });
   }
 
+//Balance of the account is fetched from the database & displayed from this function
   Future<void> getAmount() async {
     final id = user!.uid;
 
@@ -474,7 +459,8 @@ class _RechargeState extends State<Recharge> {
     print(oneAmount?.amount);
   }
 
-  void displayMessage() {
+//Process the balance of the account & add details to the database.
+void displayMessage() {
     if (amountController.text != null) {
       int amount = (int.tryParse(oneAmount!.amount) ?? 0) +
           (int.tryParse(amountController.text) ?? 0);
