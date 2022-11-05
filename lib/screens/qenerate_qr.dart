@@ -16,7 +16,7 @@ class GenerateQr extends StatefulWidget {
   @override
   _GenerateQrState createState() => _GenerateQrState();
 }
-
+//QR code will generate from an API
 class _GenerateQrState extends State<GenerateQr> {
   late double widthScale, heightScale;
   List<Journey> journey = [];
@@ -46,7 +46,6 @@ class _GenerateQrState extends State<GenerateQr> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getPastJourney();
   }
@@ -85,7 +84,7 @@ class _GenerateQrState extends State<GenerateQr> {
         ),
         iconTheme: IconThemeData(color: kDarkBlue),
       ),
-      body: generateqrDetails(),
+      body: generateqrDetails(),//Function to generate QR code
     );
   }
 

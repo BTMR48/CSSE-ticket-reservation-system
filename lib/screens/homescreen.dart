@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
+//Home screen displayed to the user when logged in
 class _HomeScreenState extends State<HomeScreen> {
   late double widthScale, heightScale, width, height;
   @override

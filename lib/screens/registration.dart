@@ -33,6 +33,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         autofocus: false,
         controller: firstNameEditingController,
         keyboardType: TextInputType.name,
+        //Email field has validated by regex expressions
         validator: (value) {
           RegExp regex = new RegExp(r'^.{3,}$');
           if (value!.isEmpty) {
@@ -58,6 +59,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         autofocus: false,
         controller: secondNameEditingController,
         keyboardType: TextInputType.name,
+        //validation for second name
         validator: (value) {
           if (value!.isEmpty) {
             return ("Second Name Can't be Empty ");
@@ -106,6 +108,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         controller: passwordEditingController,
         obscureText: true,
         validator: (value) {
+          //validation for password.Regex expression has used.password should be alpha numeric.6 digits are required 
           RegExp regex = new RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
             return ("Password is required for login ");
@@ -129,6 +132,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         autofocus: false,
         controller: confirmPasswordEditingController,
         obscureText: true,
+        //password & confirm password should be match
         validator: (value) {
           if (confirmPasswordEditingController.text !=
               passwordEditingController.text) {
@@ -217,7 +221,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
-
+//Function for signup.Details will send to the database.
   void signUp(String email, String password) async {
     if (_formkey.currentState!.validate()) {
       await _auth
@@ -228,7 +232,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       });
     }
   }
-
+//function to add details to the database
   postDetailsToFirestore() async {
     // calling our fireStore
     //calling our user model

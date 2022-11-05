@@ -14,13 +14,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //form key
+  //form key for forma validation
   final _formKey = GlobalKey<FormState>();
   //editing controller
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
-  //firebase
+  //firebase authentication
   final _auth = FirebaseAuth.instance;
 
   @override
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  //login function
+  //login function.Details will fetch from database check for validity & login or display error message
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       await _auth

@@ -21,7 +21,6 @@ class _BookTicketState extends State<BookTicket> {
   late double widthScale, heightScale;
   final formKey = GlobalKey<FormState>();
   late String from, to, date, time;
-  // get text field
   TextEditingController sampledata1 = new TextEditingController();
   TextEditingController sampledata2 = new TextEditingController();
   TextEditingController sampledata3 = new TextEditingController();
@@ -66,6 +65,7 @@ class _BookTicketState extends State<BookTicket> {
     );
   }
 
+//Form validation is done in this function.
   Widget bookTicketDetails() {
     var doRecharge = () {
       print(" on do Recharge...");
@@ -80,7 +80,7 @@ class _BookTicketState extends State<BookTicket> {
       } else {
         Flushbar(
           title: 'Invalid form',
-          message: 'Please complet the form properly',
+          message: 'Please complete the form properly',
           duration: Duration(seconds: 10),
         ).show(context);
       }
@@ -400,7 +400,7 @@ class _BookTicketState extends State<BookTicket> {
       setState(() {});
     });
   }
-
+//Fetch balance amount of the account
   Future<void> getAmount() async {
     final id = user!.uid;
 
@@ -415,7 +415,7 @@ class _BookTicketState extends State<BookTicket> {
       loading = false;
     });
   }
-
+//add booking details to the databse & display error or success message.
   void displayMessage() {
     int amount = (int.tryParse(oneAmount!.amount) ?? 0) -
         (int.tryParse(sampledata5.text) ?? 0);

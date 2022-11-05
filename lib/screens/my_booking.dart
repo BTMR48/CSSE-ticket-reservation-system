@@ -15,7 +15,7 @@ class MyBooking extends StatefulWidget {
   @override
   State<MyBooking> createState() => _MyBookingState();
 }
-
+//Bookings for relevant user will display in this page
 class _MyBookingState extends State<MyBooking> {
   String? userId;
   User? user = FirebaseAuth.instance.currentUser;
@@ -36,7 +36,7 @@ class _MyBookingState extends State<MyBooking> {
       setState(() {});
     });
   }
-
+//Bookings will fetch from firebase database & list here
   Future<List<Bookings>> fetchRecords() async {
     var records = await FirebaseFirestore.instance
         .collection('users')

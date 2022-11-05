@@ -11,7 +11,7 @@ import 'homescreen.dart';
 
 class ScanQR extends StatefulWidget {
   const ScanQR({Key? key}) : super(key: key);
-
+//This page is to scan the QR code
   @override
   _ScanQRState createState() => _ScanQRState();
 }
